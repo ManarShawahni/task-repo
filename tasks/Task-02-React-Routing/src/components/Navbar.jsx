@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
 
 export default function Navbar() {
+  //Updated links to use NavLink
+  const linkStyle = ({ isActive }) => ({
+    margin: "0 10px",
+    fontWeight: isActive ? "bold" : "normal",
+    color: isActive ? "blue" : "black",
+    textDecoration: "none",
+  });
+
   return (
     <nav style={{ background: "#f8f9fa", padding: "10px" }}>
       <img
@@ -10,15 +18,15 @@ export default function Navbar() {
         width="40"
         style={{ verticalAlign: "middle" }}
       />
-      <Link to="/" style={{ margin: "0 10px" }}>
+      <NavLink to="/" style={{ linkStyle }}>
         Home
-      </Link>
-      <Link to="/about" style={{ margin: "0 10px" }}>
+      </NavLink>
+      <NavLink to="/about" style={{ linkStyle }}>
         About
-      </Link>
-      <Link to="/contact" style={{ margin: "0 10px" }}>
+      </NavLink>
+      <NavLink to="/contact" style={{ linkStyle }}>
         Contact
-      </Link>
+      </NavLink>
     </nav>
   );
 }
