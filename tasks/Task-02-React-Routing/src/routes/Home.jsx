@@ -1,15 +1,10 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { contacts } from "../data/contacts";
 import Card from "../components/Card";
 
 export default function Home() {
   const location = useLocation(); //url curr location
   const sort = new URLSearchParams(location.search).get("sort"); // "asc" or "desc"
-
-  const contacts = [
-    { title: "Manar Imad", description: "Frontend Developer - in progress" },
-    { title: "Omar Alhasan", description: "Frontend Developer" },
-    { title: "Taha Hammouz", description: "Frontend Developer" },
-  ];
 
   //sortig contacts based on query param.
   const sortedContacts = [...contacts].sort((a, b) => {
@@ -21,11 +16,17 @@ export default function Home() {
     <div>
       <h2>Home Page</h2>
       {sortedContacts.map((contact, index) => (
-        <Card
+        <Link
           key={index}
-          title={contact.title}
-          description={contact.description}
-        />
+          to={`contact/${encodeURIComponent(contact.title)}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Card
+            key={index}
+            title={contact.title}
+            description={contact.description}
+          />
+        </Link>
       ))}
     </div>
   );
